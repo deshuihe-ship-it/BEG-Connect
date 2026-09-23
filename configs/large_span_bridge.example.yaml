@@ -1,0 +1,20 @@
+# Input contract only. Restricted Large-span Bridge images/weights are NOT included.
+dataset:
+  name: large_span_bridge
+  image_dir: PROVIDE_RESTRICTED_IMAGES
+  bridge_segmentation_weights: PROVIDE_AUTHORIZED_YOLO_WEIGHTS
+  base_nerfacto_config: PROVIDE_OR_RETRAIN_BASELINE
+  camera_reconstruction: PROVIDE_SFM_MODEL
+matching:
+  global_retrieval: DINOv2
+  local_matching: ALIKED_N16_LightGlue
+  neighbourhood_radius_uav_frames: 2
+  neighbourhood_radius_phone_frames: 1
+  max_new_candidates_per_uav_image: 4
+  max_new_candidates_per_phone_image: 2
+  minimum_verified_inliers: 30
+  expanded_pair_inlier_ratio_cutoff: 0.25
+training:
+  standard_nerfacto_steps: 15000
+  bridge_finetuning_steps: 5000
+  residual_refinement_steps: 12000

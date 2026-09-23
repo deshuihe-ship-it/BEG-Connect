@@ -1,6 +1,6 @@
 # Bridge-aware UAV–phone reconstruction
 
-Research-code release candidate for the revised AIC manuscript. **This folder has not been published to GitHub and is not yet a turnkey reproduction package.** It contains research implementations of DL, BEG-Connect and BEG-NeRF, plus selected comparison/evaluation scripts. The Compact Bridge dataset is held outside this folder because permission to redistribute it has not been confirmed.
+This floder contains research implementations of DL, BEG-Connect and BEG-NeRF, plus selected comparison/evaluation scripts. The Compact Bridge dataset is held outside this folder because permission to redistribute it has not been confirmed.
 
 ## Quick check
 

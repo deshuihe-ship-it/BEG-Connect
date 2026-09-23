@@ -1,0 +1,68 @@
+# Bridge-aware UAV–phone reconstruction
+
+Research-code release candidate for the revised AIC manuscript. **This folder has not been published to GitHub and is not yet a turnkey reproduction package.** It contains research implementations of DL, BEG-Connect and BEG-NeRF, plus selected comparison/evaluation scripts. The Compact Bridge dataset is held outside this folder because permission to redistribute it has not been confirmed.
+
+## Quick check
+
+With a Compact Bridge dataset that you are authorized to use, run from this directory:
+
+```bash
+python examples/check_release.py --data-dir /path/to/compact_bridge
+# Optional image decoding and mask-size check; requires Pillow:
+python examples/check_release.py --data-dir /path/to/compact_bridge --deep
+```
+
+The check requires a dataset with `images/`, `masks/`, and `metadata/image_source_mapping.csv`. It confirms the expected 600 image/mask pairs and source counts (331 UAV, 269 phone); the optional deep check also decodes images and validates mask sizes/nonempty masks. It does not measure segmentation or reconstruction quality, or reproduce paper metrics. No dataset is included in this code-only candidate.
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `src/matching/paper_methods/` | Historical Large-span Bridge DL and BEG-Connect implementations. |
+| `src/matching/roma_comparison/` | DINOv2–RoMa comparison scripts. |
+| `src/training/beg_nerf/` | Bridge-patch fine-tuning, residual U-Net, rendering cache and evaluation. |
+| `src/training/beg_nerf/compact_bridge/` | Compact Bridge preparation/training/evaluation wrappers using the shared implementation. |
+| `src/evaluation/` | Bridge-region and cross-source diagnostics; some are legacy workspace scripts. |
+| `configs/` | Documented parameter records and method settings, **not** a fully executable experiment runner. |
+| `results/` | A numerical three-seed repeatability summary; no private checkpoints. |
+| `examples/train_standard_nerfacto.sh` | Standard Nerfacto training template for BEG-C geometry; requires a processed reconstruction. |
+| `LICENSE` | MIT license for original project code and documentation. |
+| `THIRD_PARTY_NOTICES.md` | Preliminary software, model, and data notices, including unresolved version and dependency-audit items. |
+| `LICENSE_STATUS.md` | Approval and release-rights checklist. |
+| `docs/` | [Method map](docs/METHOD_MAP.md), [reproduction guide](docs/REPRODUCIBILITY.md), [dataset notes](docs/DATASET.md), and [code overview](docs/CODE_OVERVIEW.md). |
+
+The author team selected MIT for original project code and documentation. This license does not cover any dataset or third-party software/model weights. No dataset or data license is included because redistribution authority has not been confirmed. A CC BY 4.0 option note is kept with the local-only data; it grants no rights.
+
+## Names used in the paper
+
+| Name | Implementation |
+|---|---|
+| DL | DINOv2 global retrieval + ALIKED/LightGlue local matching. |
+| DL+E / DL+G | DL with bridge enhancement / guided expansion individually. These are component ablations, not separate learned models; final standalone run drivers are **not yet verified**. |
+| BEG / BEG-Connect | DL plus bridge enhancement and conservative guided expansion. |
+| BG / VT | Comparison settings; final-run entry points have **not yet been verified** in this package. |
+| BEG-C | BEG-Connect SfM output with **standard Nerfacto**—no distinct BEG-C neural architecture. |
+| BEG-NeRF | Bridge-biased patch fine-tuning followed by a residual render-refinement U-Net. |
+| Complete | BEG-Connect plus BEG-NeRF. |
+| D-L / D-R | DINOv2 retrieval with LightGlue / RoMa matching comparison. |
+
+See [METHOD_MAP.md](docs/METHOD_MAP.md) for file-level provenance. A file name or a descriptive YAML setting does not by itself prove that a paper-table row can be rerun.
+
+## What can and cannot be run
+
+- The data-integrity checker needs no ML dependencies, but requires a separately obtained dataset and distribution/use rights.
+- The Large-span Bridge DL/BEG-Connect scripts require authorized images; BEG-Connect also requires the unreleased bridge-segmentation YOLO weights. `BRIDGE_LARGE_ROOT`, `LIGHTGLUE_REPO`, `BRIDGE_YOLO_WEIGHTS` and optionally `COLMAP_BIN` configure those historical scripts. Their full end-to-end run has **not** been tested from this standalone folder.
+- Compact Bridge BEG-NeRF wrappers now refer to the shared code **inside this package** and accept explicit paths. They still require a Nerfstudio-processed reconstruction (`transforms.json`), exact matching masks, a baseline Nerfacto config/checkpoint, and compatible dependencies. Those reconstruction/weight artifacts are not supplied. The [reproduction guide](docs/REPRODUCIBILITY.md) describes the input contract and commands.
+- `environment/requirements-minimal.txt` is an **unversioned dependency inventory**, not a validated lockfile. Exact historical package versions are pending verification.
+
+The two bridge scenes use different mask provenance: Large-span Bridge uses a trained YOLO segmenter; Compact Bridge masks in the local holdback were generated by the V3.1 rule-based workflow. **This package does not contain a SAM model, SAM prompt protocol or SAM weights.** No claim of SAM-based reproducibility is made.
+
+Early training variants and an experiment-workbook helper were moved to the unpublished sibling archive `../bridge_aware_reconstruction_unpublished_archive/`; they are not presented as the final BEG-NeRF implementation. The local Compact Bridge data is held separately in `../bridge_aware_reconstruction_local_data/` and is not part of this candidate.
+
+## Release and evidence limits
+
+Large-span Bridge media and its 40 manual annotations are restricted by the external acquisition arrangement. Neither bridge's camera intrinsics/poses, original videos, COLMAP databases, split/run manifests or training checkpoints are included. Consequently, downloading this folder alone cannot reproduce the manuscript's exact SfM or neural-rendering numbers. Bridge masks are not geometry or defect ground truth.
+
+Before publication, check whether any university or sponsor claims ownership of the code, complete the third-party audit, and resolve the code-path, version-lock and clean-room run items in [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). Do not add the local Compact Bridge dataset unless publication rights are confirmed and a data license is approved. No remote upload was performed.
+
+License decisions are tracked in [LICENSE_STATUS.md](LICENSE_STATUS.md).

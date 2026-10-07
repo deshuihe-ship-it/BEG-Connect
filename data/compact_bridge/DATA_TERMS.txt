@@ -1,0 +1,5 @@
+Compact Bridge data release
+
+The author confirmed permission to make these processed images, masks, source labels and retained split lists publicly downloadable on 6 October 2026.
+These data are not covered by the code MIT license. No CC BY or other unrestricted redistribution, commercial-use or reuse license has been selected. Contact the corresponding author identified in the manuscript for reuse permission.
+The release contains processed 960 x 540 frames, not original camera-resolution files. Masks are approximate bridge regions, not geometry or defect ground truth.

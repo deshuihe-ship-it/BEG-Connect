@@ -1,0 +1,29 @@
+# Descriptive manuscript-to-component map; not an executable experiment matrix.
+# Reference driver: src/matching/compact_bridge/run_reference_ablation.py.
+# Reconstructed drivers do not guarantee historical numerical results.
+DL:
+  global_dinov2_retrieval: true
+  bridge_region_enhancement: false
+  guided_candidate_expansion: false
+DL+E:
+  original_experiment_script: final_experiment_version_unconfirmed
+  standalone_code_provided: false
+  component_location: BEG_main_method
+  global_dinov2_retrieval: true
+  bridge_region_enhancement: true
+  guided_candidate_expansion: false
+DL+G:
+  original_experiment_script: final_experiment_version_unconfirmed
+  standalone_code_provided: false
+  component_location: BEG_main_method
+  global_dinov2_retrieval: true
+  bridge_region_enhancement: false
+  guided_candidate_expansion: true
+BEG:
+  global_dinov2_retrieval: true
+  bridge_region_enhancement: true
+  guided_candidate_expansion: true
+BG:
+  original_experiment_script: final_experiment_version_unconfirmed
+  description: bridge_guided_comparison_without_global_retrieval
+  status: reconstructed_guided_sift_reference

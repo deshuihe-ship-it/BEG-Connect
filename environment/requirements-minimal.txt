@@ -1,0 +1,20 @@
+# Research-script dependency inventory, NOT a tested/pinned installation lockfile.
+# Match Nerfstudio/PyTorch/CUDA versions before installing other packages.
+
+numpy
+pandas
+opencv-python
+openpyxl
+torch
+torchvision
+torchmetrics
+nerfstudio
+Pillow
+scipy
+h5py
+PyYAML
+jaxtyping
+ultralytics
+
+# DINOv2, ALIKED, LightGlue, RoMa, hloc and COLMAP are external dependencies.
+# Some historical scripts import these from separate local repositories.

@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-06",
+  "scope": "Local execution/component checks in an existing environment. No neural optimizer steps, no independent full retraining, no guarantee of manuscript numerical results.",
+  "code_provenance": {
+    "retained_core": "DL, BEG, masks, neural model/loss code, evaluation and RoMa comparison implementations retained with portability edits.",
+    "reconstructed": "Complete versions of the original BG, DL+E and DL+G scripts corresponding to the final experiments could not be identified in the retained materials. Only BG is supplied as a reconstructed reference. No standalone DL+E/DL+G code is provided; the component modules remain in BEG. VT wraps official COLMAP.",
+    "packaging": "Compact Bridge CLI wrappers and self-contained Nerfstudio patch-sampler integration."
+  },
+  "interfaces": {
+    "all_python_files_syntax_valid": true,
+    "cli_help_passed": 24,
+    "library_files": 1,
+    "shell_syntax_valid": true
+  },
+  "dataset": {
+    "images": 600,
+    "masks": 600,
+    "deep_decode_and_checksums_passed": true,
+    "training_preparation_frames": 600,
+    "training_preparation_split": [
+      525,
+      75
+    ],
+    "preparation_paths_are_absolute": true
+  },
+  "matching": {
+    "dl": {
+      "input_images": 8,
+      "registered_images": 8,
+      "registered_uav": 4,
+      "registered_phone": 4,
+      "final_core_regression_passed": true
+    },
+    "beg": {
+      "input_images": 8,
+      "registered_images": 8,
+      "registered_uav": 4,
+      "registered_phone": 4,
+      "new_pairs_inserted": 4,
+      "fixture": "Fresh DL smoke database with 15 cross-source pairs deliberately removed to exercise candidate expansion; not a historical experiment."
+    },
+    "vt": {
+      "input_images": 30,
+      "largest_model_registered_images": 11,
+      "largest_model_registered_uav": 11,
+      "largest_model_registered_phone": 0,
+      "scope": "Execution check with a small vocabulary built on test inputs, not a production retrieval evaluation. Largest model is single-source; this does not demonstrate successful cross-source fusion."
+    },
+    "bg": {
+      "input_images": 30,
+      "largest_model_registered_images": 11,
+      "largest_model_registered_uav": 11,
+      "largest_model_registered_phone": 0,
+      "scope": "Execution check with a small vocabulary built on test inputs, not a production retrieval evaluation. Largest model is single-source; this does not demonstrate successful cross-source fusion."
+    }
+  },
+  "neural_components": {
+    "private_sampler_method_absent_during_import": true,
+    "patch_batch_shape": [
+      4096,
+      3
+    ],
+    "contiguous_32x32_patches": true,
+    "loss_terms": {
+      "rgb_loss": 0.16717708110809326,
+      "beg_dssim_loss": 0.09855470061302185,
+      "beg_lpips_loss": 0.002385007683187723,
+      "beg_edge_loss": 0.03518471121788025
+    },
+    "loss_gradients_finite": true,
+    "residual_forward_backward_finite": true,
+    "optimizer_steps": 0,
+    "scope": "Synthetic component checks only; no scene training or complete Nerfstudio trainer run"
+  },
+  "limitations": [
+    "Full 600-image matching/SfM and neural training were not rerun.",
+    "Help/import checks do not establish full runtime correctness of every optional comparison/evaluation workflow.",
+    "No new isolated environment installation was tested.",
+    "An initial adjacent-eight-image SIFT attempt could not initialize a model; the wider 30-image subset completed.",
+    "Reference ablation implementation choices may differ from unrecovered original scripts."
+  ],
+  "checked_python_sha256": {
+    "examples/build_enhanced_dataset.py": "34f12eefc44900e902b7ccf7a2c7cf1c5ca4b2e67a7e8a14a79bd19148082e0f",
+    "examples/check_release.py": "015dd250be541e032785a0fcaf978b6385116d9127ee0638580a472fd38e9ec9",
+    "src/evaluation/analyze_bridge_participation_v3_1.py": "c720f26dbbb8bcfba1def6578fc2bf64fa1894ad45aa1d0bae12edcac0b1b43b",
+    "src/evaluation/evaluate_bridge_crop_rendering.py": "e05273a4fde4a38a069365f2b69a705561d3be8a1f896608d9aea039bd61f2a6",
+    "src/evaluation/evaluate_combined_source_split_bridge_crop.py": "32b402a583c8b0cfd6a35820620370866a6c70ca3f617279182c581079c71d26",
+    "src/evaluation/paper_results/roma_common50_eval.py": "9b4e2e205e3424d696d51e18f20f3669f7b578ab30ebb2f2e898c36f2db0ddd9",
+    "src/matching/compact_bridge/run_matching.py": "3a6ed0febddb3d37ad29e230f6fa3df7774805096bab7a0688192750ac4062ee",
+    "src/matching/compact_bridge/run_reference_ablation.py": "a10a6be19a4d700ba0e4170203ce0be6a950e857a997bdca1c6fb745c37549dd",
+    "src/matching/create_combined_source_split_datasets.py": "1f63d9016ef478e427098935c8b102de4b3a2b16769b0ba540c90cfc0e2f721c",
+    "src/matching/generate_bridge_region_masks_v3_1.py": "6319ead1bacb42e9337a32a2c18a62dd7b2801054985be0c628ddca048777903",
+    "src/matching/paper_methods/beg_connect_conservative_expansion.py": "5688e0d051f18dc3d1fde7ac41136b4d4d441f4264e8ed9fe785609a9969ad2b",
+    "src/matching/paper_methods/dl_dinov2_lightglue.py": "ca37c7877fb9324115f7d8b251e201bdf42717881b0c453e3050527db7c1c612",
+    "src/matching/roma_comparison/dl_roma.py": "d5c188b91a29b6f52a9b019278f5f53eb9b013e7b55d9c1ae33b95d658ab74b8",
+    "src/matching/roma_comparison/dl_roma_beg_connect.py": "b943fc8bcc5708346022639230a28f8195962e85842df2996db89a72d461e81e",
+    "src/training/beg_nerf/cache_render_refiner_pairs.py": "055d41efaf59da01bda45bccf2c20746403a2dde530433f4d66c79b7571413cd",
+    "src/training/beg_nerf/compact_bridge/evaluate_stage1.py": "adf6c51d32e6c9131af5edb2981222f1b21d25518e04da7193fcce10477fff12",
+    "src/training/beg_nerf/compact_bridge/prepare_beg_nerf_v2.py": "bc685b48a95e7acb5e374742b1fd3c17d0f96f65fb5a2b396d47f1893ad3597d",
+    "src/training/beg_nerf/compact_bridge/run_refiner_step.py": "b4732b4c6f4bfb1abc8c49d140cae56bbe5ccea55480eed14e3eeb828d4df56f",
+    "src/training/beg_nerf/compact_bridge/run_stage1.py": "c98cfab175f2794d593f40c69dd6121ed8480b2cafa1494424fccd03216a4822",
+    "src/training/beg_nerf/evaluate_beg_nerf_v2.py": "018965806b1cb67bf992c69ef9ed19e5e27958a5cceef31615afb4e3a7e4f2f6",
+    "src/training/beg_nerf/evaluate_render_refiner.py": "d3408fe468a3adec2ae0300c4cdde9a34a034fd36871fd9a8ec3bc1324dc7ba4",
+    "src/training/beg_nerf/prepare_beg_nerf_v2.py": "71fd5124a71742931c1c6dffbcf214190048536d590a37c065a0f98008f33eea",
+    "src/training/beg_nerf/render_refiner_model.py": "95fab074c35f395405bf713b95cb8d9df21bcec0d730541cce57e9641f4679aa",
+    "src/training/beg_nerf/train_beg_nerf_v2.py": "ec94fb669f399ddc2113a093245b0b7f823e705bcc449a5ef77a7e2f1b07e74a",
+    "src/training/beg_nerf/train_render_refiner.py": "fcb30680cfb706b55575ac763a1aed37a3c4039b62a3ed4107cb827c9c69fc08"
+  },
+  "optional_roma": "One-pair matching stage executed with coarse resolution 280 and 256 samples. Other stages and paper-setting performance not validated.",
+  "release_scope": {
+    "provided_matching_methods": [
+      "dl",
+      "beg",
+      "vt",
+      "bg"
+    ],
+    "standalone_ablation_code_not_provided": [
+      "DL+E",
+      "DL+G"
+    ],
+    "original_final_experiment_scripts_unconfirmed": [
+      "BG",
+      "DL+E",
+      "DL+G"
+    ],
+    "numerical_reproduction_guaranteed": false
+  },
+  "retained_split_membership_guard": {
+    "checks": [
+      "Exact released train/val/test filename membership passes",
+      "Reordered membership passes",
+      "Equal-count incorrect membership rejected",
+      "Duplicate actual filename rejected",
+      "Missing split list rejected",
+      "Duplicate retained filename rejected"
+    ],
+    "scope": "Direct validation-function tests; no retraining or new full end-to-end run."
+  }
+}
